@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>계산기</title>
+    <!-- <script src="jquery-3.5.0.js"></script> -->
+    <style>
+        caption{ font-size: 32px; }
+        table {width: 320px;}
+        th{
+            padding-right: 10px;
+            height: 80px;
+        }
+        td{
+            height: 75px;
+            text-align: center;
+        }
+        th > input {
+            width: 100%;
+            border:none;
+            background: #333; color: white;
+            text-align: right; font-size: 48px;
+        }
+        td > input[type="button"]{
+            width: 100%; height: inherit;
+            color: #333; font-size: 36px;
+            border: none;
+        }
+        td > input[type=button]:hover{
+            background: #999;
+        }
+        td:last-child > input{
+            background: orange;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption id="display">계산기</caption>
+        <tr>
+            <th colspan="4"><input id="resultbox" type="text" name="result" value="0"></th>
+        </tr>
+        <tr>
+            <td><input class="button" type="button" value="7" onclick="insert(7)"></td>
+            <td><input class="button" type="button" value="8" onclick="insert(8)"></td>
+            <td><input class="button" type="button" value="9" onclick="insert(9)"></td>
+            <td><input class="button" type="button" value="＋" onclick="insertop('+')"></td>
+        </tr>
+        <tr>
+            <td><input class="button" type="button" value="4" onclick="insert(4)"></td>
+            <td><input class="button" type="button" value="5" onclick="insert(5)"></td>
+            <td><input class="button" type="button" value="6" onclick="insert(6)"></td>
+            <td><input class="button" type="button" value="-" onclick="insertop('-')"></td>
+        </tr>
+        <tr>
+            <td><input class="button" type="button" value="1" onclick="insert(1)"></td>
+            <td><input class="button" type="button" value="2" onclick="insert(2)"></td>
+            <td><input class="button" type="button" value="3" onclick="insert(3)"></td>
+            <td><input class="button" type="button" value="×" onclick="insertop('*')"></td>
+        </tr>
+        <tr>
+            <td colspan="3"><input class="button" type="button" value="0" onclick="insert(0)"></td>
+            <td><input class="button" type="button" value="÷" onclick="insertop('/')"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input id="cls_btn" class="cls_btn" type="button" value="C" onclick="location.reload();"></td>
+            <td colspan="2"><input id="result_btn" class="result_btn" type="button" value="＝" onclick="equal()"></td>
+        </tr>
+        <tr>
+            <th colspan="4">메모리:<input id="memory1" type="text" name="result" value=""></th>
+        </tr>
+        <tr>
+            <th colspan="4">마지막입력:<input id="memory2" type="text" name="result" value=""></th>
+        </tr>
+        <tr>
+            <th colspan="4">연산자:<input id="operator" type="text" name="result" value=""></th>
+        </tr>
+    </table>
+    
+    <script>
+        var resultBox = document.getElementById('resultbox');
+        var memory1Box = document.getElementById("memory1");
+        var memory2Box = document.getElementById("memory2");
+        var operatorBox = document.getElementById("operator");
+        
+        function insert(value){
+            if(resultBox.value == 0){
+                resultBox.value = '';
+            }
+            resultBox.value += value;
+            memory2.value = value;
+        }
+        
+        function insertop(value){
+            memory2Box.value = value;
+            operatorBox.value = value;
+            memory1Box.value = resultBox.value;
+            resultBox.value = "0";
+        }
+
+        function equal(){
+            resultVal = resultBox.value;
+            memory1Val = memory1Box.value;
+            if (memory2.value === "=")
+            {
+                resultStr = resultBox.value+operatorBox.value+memory1Box.value;                
+            }
+            else {
+                resultStr = resultBox.value+operatorBox.value+memory1Box.value;
+                memory1Box.value = resultVal;
+            }
+            resultBox.value = eval(resultStr);
+            memory2.value = "=";
+        }   
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[제주어] 아래아 변환기 - 온점을 아래아로 - Arae-a Converter for Jeju language</title>
+    <style>
+        body textarea{
+            font-family: "맑은 고딕", "Malgun Gothic";
+        }
+    </style>
+</head>
+<body>
+
+<textarea id='textbox' rows="20" cols="100">ㅎ.ㄴ저옵서예, ㅇ..망지다, ㅅ.ㅣㅇ각</textarea><br /> 
+<input type="button" value="변환" onclick="conv()"><br />
+아래아 대신 온점(.)이용하여 입력된 제주어를 옛한글 표준 첫가끝 형태로 수정합니다. 아래아를 제대로 보기 위해서는 '한컴오피스 함초롬체'처럼 유니코드 표준 옛한글을 지원하는 글꼴이 필요합니다. 변환 가능한 모음은 ‘ㆍ(아래아)’, ‘ᅟᆢ(쌍아래아)’, 'ㆎ(아래아 이)'입니다. <br />
+예: ㅎ.ㄴ저옵서예 → ᄒᆞᆫ저옵서예
+
+    <script>
+var chotext=`ᄀ ㄱ 기역 3.399
+ᄁ ㄲ 쌍기역 3.398
+ᄂ ㄴ 니은 3.397
+ᄃ ㄷ 디귿 3.396
+ᄄ ㄸ 쌍디귿 3.395
+ᄅ ㄹ 리을 3.394
+ᄆ ㅁ 미음 3.393
+ᄇ ㅂ 비읍 3.392
+ᄈ ㅃ 쌍비읍 3.391
+ᄉ ㅅ 시옷 3.390
+ᄊ ㅆ 쌍시옷 3.389
+ᄋ ㅇ 이응 3.388
+ᄌ ㅈ 지읒 3.387
+ᄍ ㅉ 쌍지읒 3.386
+ᄎ ㅊ 치읓 3.385
+ᄏ ㅋ 키읔 3.384
+ᄐ ㅌ 티읕 3.383
+ᄑ ㅍ 피읖 3.382
+ᄒ ㅎ 히읗 3.381`
+var jungtext=`ᆢ .. 쌍아래아 2.298
+ᆡ .ㅣ 아래아이
+ᆞ . 아래아 2.299`
+var jongtext=`ᆪ ㄱㅅ 기역시옷 3.196
+ᆬ ㄴㅈ 니은지읒 3.194
+ᆭ ㄴㅎ 니은히읗 3.193
+ᆰ ㄹㄱ 리을기역 3.190
+ᆱ ㄹㅁ 리을미음 3.189
+ᆲ ㄹㅂ 리을비읍 3.188
+ᆳ ㄹㅅ 리을시옷 3.187
+ᆴ ㄹㅌ 리을티읕 3.186
+ᆵ ㄹㅍ 리을피읖 3.185
+ᆶ ㄹㅎ 리을히읗 3.184
+ᆹ ㅂㅅ 비읍시옷 3.181
+ᆫ ㄴ 니은 3.195
+ᆮ ㄷ 디귿 3.192
+ᆯ ㄹ 리을 3.191
+ᆷ ㅁ 미음 3.183
+ᆸ ㅂ 비읍 3.182
+ᆺ ㅅ 시옷 3.180
+ᆻ ㅆ 쌍시옷 3.179
+ᆼ ㅇ 이응 3.178
+ᆽ ㅈ 지읒 3.177
+ᆾ ㅊ 치읓 3.176
+ᆿ ㅋ 키읔 3.175
+ᇀ ㅌ 티읕 3.174
+ᇁ ㅍ 피읖 3.173
+ᇂ ㅎ 히읗 3.172
+ᆨ ㄱ 기역 3.198
+ᆩ ㄲ 쌍기역 3.197
+   3.199`
+
+var textbox = document.getElementById('textbox');
+
+function getlist(text){
+    var result = [];
+    textlines = text.split('\n');
+    for (var i of textlines){
+        splited = i.split(' ');
+        result.push([splited[0], splited[1]]);   
+    }
+    return result;
+}
+
+var cho = getlist(chotext);
+var jung = getlist(jungtext);
+var jong = getlist(jongtext);
+
+var dic = {};
+for (var i of cho){
+    for (var j of jung){
+        for (var k of jong){
+            dic[i[1]+j[1]+k[1]] = i[0]+j[0]+k[0];         
+        }
+    }
+}
+
+function context(text){
+for (var i in dic)
+{
+    text = text.replace(i,dic[i]);
+}
+return text;
+}
+
+function conv(){
+    textbox.innerHTML = context(textbox.innerHTML);
+}
+
+    </script>
+</body>
+</html>
