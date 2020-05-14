@@ -8,14 +8,27 @@
         body textarea{
             font-family: "맑은 고딕", "Malgun Gothic";
         }
+        textarea{
+            width: 100%;
+            min-height: 15em;
+            border: 3px solid #fabd25;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+        input{
+            width: 100px;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
 
-<textarea id='textbox' rows="20" cols="100">ㅎ.ㄴ저옵서예, ㅇ..망지다, ㅅ.ㅣㅇ각</textarea><br /> 
+<textarea id='textbox'>ㅎ.ㄴ저옵서예, ㅇ..망지다, ㅅ.ㅣㅇ각</textarea><br /> 
 <input type="button" value="변환" onclick="conv()"><br />
-아래아 대신 온점(.)이용하여 입력된 제주어를 옛한글 표준 첫가끝 형태로 수정합니다. 아래아를 제대로 보기 위해서는 '한컴오피스 함초롬체'처럼 유니코드 표준 옛한글을 지원하는 글꼴이 필요합니다. 변환 가능한 모음은 ‘ㆍ(아래아)’, ‘ᅟᆢ(쌍아래아)’, 'ㆎ(아래아 이)'입니다. <br />
-예: ㅎ.ㄴ저옵서예 → ᄒᆞᆫ저옵서예
+<p>아래아 대신 온점(.)이용하여 입력된 제주어를 옛한글 표준 첫가끝 형태로 수정합니다.<br />
+아래아를 제대로 보기 위해서는 '한컴오피스 함초롬체'처럼 유니코드 표준 옛한글을 지원하는 글꼴이 필요합니다.<br />
+변환 가능한 모음은 ‘ㆍ(아래아)’, ‘ᅟᆢ(쌍아래아)’, 'ㆎ(아래아 이)'입니다. <br />
+예: ㅎ.ㄴ저옵서예 → ᄒᆞᆫ저옵서예</p>
 
     <script>
 var chotext=`ᄀ ㄱ 기역 3.399
@@ -94,7 +107,7 @@ for (var i of cho){
     }
 }
 
-function context(text){
+function convtext(text){
 for (var i in dic)
 {
     text = text.replace(i,dic[i]);
@@ -103,7 +116,7 @@ return text;
 }
 
 function conv(){
-    textbox.innerHTML = context(textbox.innerHTML);
+    textbox.value = convtext(textbox.value);
 }
 
     </script>
