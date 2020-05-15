@@ -18190,7 +18190,7 @@ function search(word){
         if(pattern.test(i.eosearch)){
             display(i)
             num++;
-            if (num>50){break;}
+            if (num>500){break;}
         }
     }
     // 한국어 검색
@@ -18199,7 +18199,7 @@ function search(word){
         if(pattern.test(i.kosearch)){
             display(i)
             num++;
-            if (num>50){break;}
+            if (num>500){break;}
         }
     }
 }
