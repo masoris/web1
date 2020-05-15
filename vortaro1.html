@@ -18183,14 +18183,26 @@ for (var i of textlines){
     } 
 
 function search(word){
-    // 에스페란토 검색
     var num = 0;
     var pattern = new RegExp(word);
+
+
+    // 에스페란토 검색 앞부분 일치
+    p = new RegExp("^"+word);
+    for (var i of vortolist){
+        if(p.test(i.eosearch)){
+            display(i)
+            num++;
+            if (num>50){break;}
+        }
+    }
+    num=0;
+    // 에스페란토 검색
     for (var i of vortolist){
         if(pattern.test(i.eosearch)){
             display(i)
             num++;
-            if (num>500){break;}
+            if (num>200){break;}
         }
     }
     // 한국어 검색
@@ -18199,7 +18211,7 @@ function search(word){
         if(pattern.test(i.kosearch)){
             display(i)
             num++;
-            if (num>500){break;}
+            if (num>200){break;}
         }
     }
 }
@@ -18229,7 +18241,7 @@ v = v.replace("Jx","Ĵ").replace("Sx","Ŝ").replace("Ux","Ŭ");
 }
 
 //테스트
-//search(supersigno('ab').toLowerCase());
+search(supersigno('ab').toLowerCase());
 //로딩 완료
 inputtext.value = "";
     </script>
