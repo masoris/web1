@@ -4,11 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에스페란토 사전</title>
+    <style>
+        body text{
+            font-family: "Verdana";
+        }
+        #input{
+            width: 200px;
+            font-size: 20px;
+            border: 3px solid #fabd25;
+            box-sizing: border-box;
+        }
+        #btn{
+            width: 70px;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        .eo{
+            color:orangered;
+            font-weight: bold;
+            font-size:110%;
+        }
+        .bro{
+            color: green;
+            font-weight: bold;
+        }
+        p{
+            margin:5px;
+        }
+    </style>
 </head>
 <body>
     
-    <input type="text" id="input" value="읽는중..." onkeyup="enterkey()">
-    <input type="button" value="검색" onclick="searchnow()">
+    <input type="text" id="input" value="로딩중..." onkeyup="enterkey()">
+    <input type="button" id="btn" value="검색" onclick="searchnow()">
     <p id="resultbox"></p>
 
 <script>
@@ -18135,6 +18163,7 @@ Zulu-o	_	줄루 사람(남아 공화국 Natal 주 일대의 용맹한 종족). Z
 zulu-o	_	줄루사람《남아프리카 Natalo의 용맹한 종족》; 줄루말.Zululando 남아연방 Natalo의 한 지방.
 zum-i	BRO9	<自> (벌레 등이) 웅웅거리다 ; 흥얼거리다, 콧노래 부르다 ; 웅얼거리다 ; (고양이 따위가) 야옹거리다 ; (탄알 등이) 윙하고 날다.
 Zurik-o	_	취리히《스위스 북부의 주 및 그 수도》. zuriko`
+
 var inputtext = document.getElementById('input');
 var resultbox = document.getElementById('resultbox');
 
@@ -18154,6 +18183,7 @@ for (var i of textlines){
     } 
 
 function search(word){
+    // 에스페란토 검색
     var num = 0;
     var pattern = new RegExp(word);
     for (var i of vortolist){
@@ -18163,6 +18193,8 @@ function search(word){
             if (num>50){break;}
         }
     }
+    // 한국어 검색
+    num=0;
     for (var i of vortolist){
         if(pattern.test(i.kosearch)){
             display(i)
@@ -18173,7 +18205,7 @@ function search(word){
 }
 
 function display(vort){
-    resultbox.innerHTML += vort.eo +"\t"+ vort.bro+"\t" + vort.ko +"<br //>";
+    resultbox.innerHTML += "<p><span class='eo'>"+vort.eo +"</span>\t<span class='bro'>"+vort.bro+"</span>\t</span class='ko'>" + vort.ko +"</span></p>";
 }
 
 function searchnow(){
@@ -18196,6 +18228,9 @@ v = v.replace("Jx","Ĵ").replace("Sx","Ŝ").replace("Ux","Ŭ");
     return v;
 }
 
+//테스트
+//search(supersigno('ab').toLowerCase());
+//로딩 완료
 inputtext.value = "";
     </script>
 </body>
